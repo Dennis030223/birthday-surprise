@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Birthday, Fritz Wendy 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #ff7eb3;
+    --rose: #ff4d8d;
+    --lavender: #c9a7ff;
+    --gold: #ffd76e;
+    --cream: #fff6fb;
+    --deep: #3a0d33;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    color: var(--deep);
+    background: linear-gradient(-45deg, #ffe0f0, #ffd0e8, #e7d4ff, #ffe9c9, #ffd9ec);
+    background-size: 400% 400%;
+    animation: gradientShift 18s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* ---------- Ambient layers ---------- */
+  .petals, .balloons { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+
+  .petal {
+    position: absolute;
+    top: -8vh;
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle at 30% 30%, #fff, var(--pink) 60%, var(--rose));
+    border-radius: 60% 0 60% 0;
+    opacity: .85;
+    animation: fall linear infinite;
+    will-change: transform;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); }
+    100% { transform: translateY(112vh) translateX(60px) rotate(540deg); }
+  }
+
+  .balloon {
+    position: absolute;
+    bottom: -220px;
+    width: 58px;
+    height: 74px;
+    border-radius: 50% 50% 48% 48%;
+    opacity: .9;
+    animation: rise linear infinite;
+  }
+  .balloon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -74px;
+    width: 1px;
+    height: 76px;
+    background: rgba(255,255,255,.75);
+  }
+  .balloon::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    background: inherit;
+    filter: blur(10px);
+    opacity: .45;
+    z-index: -1;
+  }
+  @keyframes rise {
+    0%   { transform: translateY(0) translateX(0) rotate(-3deg); }
+    100% { transform: translateY(-130vh) translateX(40px) rotate(4deg); }
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap { position: relative; z-index: 2; max-width: 960px; margin: 0 auto; padding: 48px 20px 80px; }
+
+  section { margin: 0 auto 64px; text-align: center; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: 24px; }
+  .kicker {
+    letter-spacing: .42em;
+    text-transform: uppercase;
+    font-size: .72rem;
+    font-weight: 500;
+    color: var(--rose);
+    opacity: .9;
+    margin-bottom: 8px;
+  }
+  .hero h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.4rem, 12vw, 7rem);
+    line-height: .95;
+    color: var(--rose);
+    text-shadow: 0 3px 24px rgba(255,77,141,.35), 0 1px 0 #fff;
+    margin-bottom: 10px;
+  }
+  .hero .name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2rem, 7vw, 3.4rem);
+    color: var(--lavender);
+    text-shadow: 0 2px 16px rgba(160,110,255,.4);
+  }
+  .hero .sub { margin-top: 18px; font-weight: 300; color: #7a3d68; }
+
+  /* ---------- Envelope ---------- */
+  .envelope-stage { perspective: 1200px; }
+  .envelope {
+    position: relative;
+    width: min(360px, 88vw);
+    height: min(240px, 58vw);
+    margin: 8px auto 0;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform .6s cubic-bezier(.2,.8,.2,1);
+    animation: float 5s ease-in-out infinite;
+  }
+  .envelope:hover { transform: translateY(-6px) scale(1.02); }
+  @keyframes float {
+    0%,100% { translate: 0 0; }
+    50%     { translate: 0 -12px; }
+  }
+  .env-back {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #ffb3d1, #ff8fbb);
+    border-radius: 14px;
+    box-shadow: 0 22px 50px rgba(255,77,141,.35);
+    z-index: 1;
+  }
+  .letter-peek {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: 6%;
+    height: 78%;
+    background: var(--cream);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    color: var(--rose);
+    transition: transform .8s cubic-bezier(.2,.8,.2,1) .25s;
+  }
+  .env-flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 0;
+    border-left: calc(min(360px, 88vw) / 2) solid transparent;
+    border-right: calc(min(360px, 88vw) / 2) solid transparent;
+    border-top: calc(min(240px, 58vw) * 0.62) solid var(--rose);
+    filter: brightness(1.06);
+    transform-origin: top;
+    transition: transform .8s cubic-bezier(.2,.8,.2,1);
+    z-index: 4;
+    border-radius: 14px 14px 0 0;
+  }
+  .env-front {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #ff9ec4, #ff7eb3 60%, #ff6aa6);
+    border-radius: 14px;
+    z-index: 3;
+    clip-path: polygon(0 38%, 50% 68%, 100% 38%, 100% 100%, 0 100%);
+  }
+  .seal {
+    position: absolute;
+    left: 50%; top: 46%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffe6a8, var(--gold) 60%, #e8a93c);
+    box-shadow: 0 4px 12px rgba(0,0,0,.18);
+    z-index: 5;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    transition: opacity .3s, transform .3s;
+  }
+  .envelope.open .env-flap { transform: rotateX(180deg); z-index: 0; }
+  .envelope.open .letter-peek { transform: translateY(-58%); }
+  .envelope.open .seal { opacity: 0; transform: translate(-50%, -50%) scale(.4); }
+  .envelope.open { cursor: default; }
+
+  .hint { margin-top: 20px; font-size: .9rem; color: #8a4d78; font-weight: 300; }
+
+  /* ---------- Letter card ---------- */
+  .letter {
+    max-width: 620px;
+    margin: -10px auto 0;
+    background: var(--cream);
+    border-radius: 18px;
+    padding: 40px 34px;
+    box-shadow: 0 24px 60px rgba(122,61,104,.22);
+    border: 1px solid rgba(255,255,255,.8);
+    opacity: 0;
+    transform: translateY(28px) scale(.98);
+    pointer-events: none;
+    transition: opacity .8s ease .3s, transform .8s cubic-bezier(.2,.8,.2,1) .3s;
+    position: relative;
+  }
+  .letter.show { opacity: 1; transform: none; pointer-events: auto; }
+  .letter::before {
+    content: "❦";
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    color: var(--pink); opacity: .5;
+  }
+  .letter .salutation { font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--rose); margin-bottom: 14px; }
+  .letter p { font-weight: 300; line-height: 1.85; color: #5d2a4f; margin-bottom: 14px; }
+  .letter .sign { font-family: 'Great Vibes', cursive; font-size: 1.6rem; color: var(--lavender); margin-top: 18px; }
+
+  /* ---------- Section titles ---------- */
+  .title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    color: var(--rose);
+    margin-bottom: 6px;
+  }
+  .title-sub { font-weight: 300; color: #8a4d78; margin-bottom: 30px; }
+
+  /* ---------- Cake ---------- */
+  .cake-scene { display: flex; flex-direction: column; align-items: center; }
+  .cake {
+    position: relative;
+    width: 240px;
+    margin-top: 40px;
+  }
+  .flame {
+    position: absolute;
+    top: 4px;
+    width: 14px; height: 22px;
+    background: radial-gradient(circle at 50% 70%, #fff6c0, #ffcf3f 45%, #ff7a18 100%);
+    border-radius: 50% 50% 45% 45%;
+    transform-origin: 50% 100%;
+    animation: flicker .18s ease-in-out infinite alternate;
+    transition: opacity .4s, transform .4s;
+    box-shadow: 0 0 22px 6px rgba(255,180,40,.55);
+  }
+  @keyframes flicker {
+    from { transform: scale(1) rotate(-2deg); }
+    to   { transform: scale(1.12) rotate(2deg); }
+  }
+  .cake.blown .flame { opacity: 0; transform: translateY(-14px) scale(.3); box-shadow: none; }
+  .wick {
+    position: absolute;
+    top: 22px; width: 3px; height: 14px;
+    background: #6b4b2a;
+    border-radius: 2px;
+  }
+  .candle {
+    position: absolute; top: 0;
+    width: 10px; height: 46px;
+    background: repeating-linear-gradient(45deg, #ff9ec4 0 6px, #fff 6px 12px);
+    border-radius: 4px 4px 0 0;
+    box-shadow: inset -2px 0 3px rgba(0,0,0,.1);
+  }
+  .tier {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: inset 0 -10px 0 rgba(0,0,0,.06), 0 10px 24px rgba(122,61,104,.2);
+  }
+  .tier-1 { bottom: 0; width: 240px; height: 78px; background: linear-gradient(#ffb3d1, #ff87b6); }
+  .tier-2 { bottom: 70px; width: 178px; height: 62px; background: linear-gradient(#ffe3a8, #ffd15c); }
+  .tier-3 { bottom: 126px; width: 120px; height: 52px; background: linear-gradient(#e3d2ff, #c9a7ff); }
+  .drip {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    height: 16px; border-radius: 0 0 12px 12px;
+  }
+  .blow-btn {
+    margin-top: 34px;
+    border: none;
+    background: linear-gradient(135deg, var(--rose), var(--lavender));
+    color: #fff;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 14px 30px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(255,77,141,.35);
+    transition: transform .2s, box-shadow .2s, opacity .3s;
+  }
+  .blow-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(255,77,141,.45); }
+  .blow-btn:active { transform: translateY(0) scale(.98); }
+  .wish {
+    margin-top: 20px; font-family: 'Great Vibes', cursive;
+    font-size: 2rem; color: var(--rose);
+    opacity: 0; transform: scale(.85);
+    transition: opacity .5s, transform .5s;
+  }
+  .wish.show { opacity: 1; transform: scale(1); }
+
+  /* ---------- Flower garden ---------- */
+  .garden {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+    min-height: 240px;
+  }
+  .flower { position: relative; width: 90px; height: 210px; }
+  .stem {
+    position: absolute; left: 50%; bottom: 0;
+    width: 5px; height: 0;
+    background: linear-gradient(#7ec850, #4f9c34);
+    transform: translateX(-50%);
+    border-radius: 3px;
+    transition: height 1.1s cubic-bezier(.2,.8,.2,1);
+  }
+  .flower.bloom .stem { height: 120px; }
+  .bloom-head {
+    position: absolute; left: 50%; bottom: 112px;
+    transform: translateX(-50%) scale(0);
+    transform-origin: 50% 90%;
+    transition: transform .8s cubic-bezier(.2,1.4,.4,1) .5s;
+    z-index: 2;
+  }
+  .flower.bloom .bloom-head { transform: translateX(-50%) scale(1); }
+  .petals-wrapper {
+    position: relative; width: 70px; height: 70px;
+    animation: sway 4s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%,100% { transform: rotate(-5deg); }
+    50%     { transform: rotate(5deg); }
+  }
+  .p {
+    position: absolute; left: 50%; top: 50%;
+    width: 30px; height: 46px;
+    margin: -46px 0 0 -15px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform-origin: 50% 100%;
+    box-shadow: inset 0 -6px 8px rgba(0,0,0,.06);
+  }
+  .core {
+    position: absolute; left: 50%; top: 50%;
+    width: 26px; height: 26px; margin: -13px 0 0 -13px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff4b8, var(--gold) 60%, #e0a52c);
+    z-index: 3;
+    box-shadow: 0 3px 8px rgba(0,0,0,.15);
+  }
+  .leaf {
+    position: absolute; width: 30px; height: 16px;
+    background: linear-gradient(#8bd45f, #4f9c34);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    transition: opacity .6s ease 1s;
+  }
+  .flower.bloom .leaf { opacity: 1; }
+  .leaf.left  { bottom: 46px; left: 8px; transform: rotate(-28deg); }
+  .leaf.right { bottom: 70px; right: 8px; transform: rotate(28deg) scaleX(-1); }
+
+  /* ---------- Wishes grid ---------- */
+  .wishes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .wish-card {
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: left;
+    box-shadow: 0 14px 30px rgba(122,61,104,.12);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .wish-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(122,61,104,.2); }
+  .wish-card .emoji { font-size: 1.6rem; }
+  .wish-card h3 { font-family: 'Great Vibes', cursive; font-size: 1.6rem; color: var(--rose); margin: 6px 0 6px; }
+  .wish-card p { font-weight: 300; font-size: .92rem; line-height: 1.6; color: #6b3259; }
+
+  /* ---------- Footer ---------- */
+  footer { text-align: center; padding: 20px 0 10px; font-weight: 300; color: #8a4d78; font-size: .9rem; }
+  .heart { color: var(--rose); }
+
+  /* ---------- Confetti ---------- */
+  .confetti {
+    position: fixed;
+    top: -20px;
+    width: 10px; height: 14px;
+    z-index: 50;
+    pointer-events: none;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0) ; opacity: 1; }
+    100% { transform: translateY(108vh) rotate(720deg); opacity: .9; }
+  }
+
+  .sparkle { position: fixed; font-size: 1rem; z-index: 50; pointer-events: none; animation: rise3 linear forwards; }
+  @keyframes rise3 {
+    0% { transform: translateY(0) scale(.4); opacity: 1; }
+    100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
+  }
+
+  @media (max-width: 520px) {
+    .letter { padding: 30px 22px; }
+    .garden { gap: 2px; }
+    .flower { width: 66px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001s !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+<div class="balloons" id="balloons"></div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="kicker">A little surprise for you</div>
+    <h1>Happy Birthday</h1>
+    <div class="name" id="birthdayName">Fritz Wendy</div>
+    <p class="sub">Scroll down for flowers, wishes &amp; a letter made just for you.</p>
+  </section>
+
+  <section class="envelope-stage">
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open your birthday letter">
+      <div class="env-back"></div>
+      <div class="letter-peek">for you ♥</div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="seal">✦</div>
+    </div>
+    <p class="hint" id="hint">Tap the envelope to open your letter</p>
+
+    <div class="letter" id="letter">
+      <div class="salutation" id="letterName">Dear Fritz Wendy,</div>
+      <p>Today the whole world gets a little brighter, because it's the day you were born. Thank you for the laughter, the kindness, and the way you make ordinary moments feel like celebrations.</p>
+      <p>May this year bring you endless joy, wild dreams coming true, and flowers in every corner of your life. You deserve all the love in the world &mdash; and so much more.</p>
+      <p>Never forget how deeply you are loved. Here's to you, today and always.</p>
+      <div class="sign">With all my love ♥</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="title">Make a Wish</div>
+    <p class="title-sub">Close your eyes, think of something wonderful, then blow out the candles.</p>
+    <div class="cake-scene">
+      <div class="cake" id="cake">
+        <div class="tier tier-1"></div>
+        <div class="tier tier-2"></div>
+        <div class="tier tier-3"></div>
+        <div class="drip" style="bottom:62px; width:120px; background:#ffe3a8;"></div>
+        <div class="drip" style="bottom:118px; width:80px; background:#e3d2ff;"></div>
+        <div class="candle" id="candle" style="left:115px;">
+          <div class="wick" style="left:3px;"></div>
+          <div class="flame" style="left:-2px;"></div>
+        </div>
+      </div>
+      <button class="blow-btn" id="blowBtn">Blow out the candle 💨</button>
+      <div class="wish" id="wish">Your wish is on its way ✨</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="title">A Garden For You</div>
+    <p class="title-sub">Every flower here is a little piece of my wishes for you.</p>
+    <div class="garden" id="garden"></div>
+  </section>
+
+  <section>
+    <div class="title">Birthday Wishes</div>
+    <p class="title-sub">A few notes tucked into your day.</p>
+    <div class="wishes">
+      <div class="wish-card">
+        <div class="emoji">🌈</div>
+        <h3>Joy</h3>
+        <p>May your days be filled with color, laughter, and moments that make your heart feel full.</p>
+      </div>
+      <div class="wish-card">
+        <div class="emoji">🌻</div>
+        <h3>Growth</h3>
+        <p>May you bloom in every direction, becoming more beautifully, perfectly you each day.</p>
+      </div>
+      <div class="wish-card">
+        <div class="emoji">💖</div>
+        <h3>Love</h3>
+        <p>May you always feel how much you are cherished &mdash; today, tomorrow, and always.</p>
+      </div>
+      <div class="wish-card">
+        <div class="emoji">⭐</div>
+        <h3>Dreams</h3>
+        <p>May every wish you whisper find its way to coming true, and then some.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Made with <span class="heart">♥</span> just for you &middot; <span id="year"></span>
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ======== Personalize here ======== */
+  const CONFIG = {
+    name: "Fritz Wendy",          // shown under "Happy Birthday"
+    letterName: "Dear Fritz Wendy,",    // greeting inside the letter
+  };
+  /* ================================= */
+
+  const $ = (id) => document.getElementById(id);
+
+  $("birthdayName").textContent = CONFIG.name;
+  $("letterName").textContent = CONFIG.letterName;
+  $("year").textContent = new Date().getFullYear();
+
+  /* ---------- Ambient petals ---------- */
+  const petalColors = ["#ff9ec4", "#ffd0e8", "#e3d2ff", "#ffd76e", "#ffffff"];
+  const petalsBox = $("petals");
+  for (let i = 0; i < 26; i++) {
+    const p = document.createElement("div");
+    p.className = "petal";
+    const size = 10 + Math.random() * 16;
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+    p.style.background = `radial-gradient(circle at 30% 30%, #fff, ${
+      petalColors[i % petalColors.length]
+    } 60%, ${petalColors[(i + 2) % petalColors.length]})`;
+    p.style.animationDuration = 7 + Math.random() * 9 + "s";
+    p.style.animationDelay = -Math.random() * 12 + "s";
+    p.style.opacity = 0.5 + Math.random() * 0.45;
+    petalsBox.appendChild(p);
+  }
+
+  /* ---------- Balloons ---------- */
+  const balloonColors = [
+    "radial-gradient(circle at 35% 30%, #ffd1e6, #ff7eb3)",
+    "radial-gradient(circle at 35% 30%, #e0d0ff, #a97bff)",
+    "radial-gradient(circle at 35% 30%, #fff0b8, #ffcb3d)",
+    "radial-gradient(circle at 35% 30%, #c8f5d0, #4fc46f)",
+    "radial-gradient(circle at 35% 30%, #cfe6ff, #5aa7ff)",
+  ];
+  const balloonsBox = $("balloons");
+  for (let i = 0; i < 9; i++) {
+    const b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * 92 + "vw";
+    b.style.background = balloonColors[i % balloonColors.length];
+    b.style.animationDuration = 14 + Math.random() * 12 + "s";
+    b.style.animationDelay = -Math.random() * 20 + "s";
+    b.style.transform = `scale(${0.7 + Math.random() * 0.7})`;
+    balloonsBox.appendChild(b);
+  }
+
+  /* ---------- Confetti helpers ---------- */
+  const confettiColors = ["#ff7eb3", "#ffd76e", "#c9a7ff", "#7ee0a8", "#ff9ec4", "#ffffff"];
+  function burstConfetti(count = 90, x, y) {
+    for (let i = 0; i < count; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      const left = x != null ? x : Math.random() * 100;
+      c.style.left = left + "vw";
+      c.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      c.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+      const dur = 2.4 + Math.random() * 2.6;
+      c.style.animationDuration = dur + "s";
+      c.style.animationDelay = Math.random() * 0.5 + "s";
+      c.style.width = 6 + Math.random() * 8 + "px";
+      c.style.height = 8 + Math.random() * 12 + "px";
+      if (y != null) {
+        c.style.top = y + "vh";
+        c.style.animationName = "confettiFall";
+      }
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), (dur + 1) * 1000);
+    }
+  }
+
+  function sparkle(cx, cy, count = 14) {
+    const icons = ["✨", "⭐", "💫", "🌟", "💖"];
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement("div");
+      s.className = "sparkle";
+      s.textContent = icons[Math.floor(Math.random() * icons.length)];
+      s.style.left = cx + (Math.random() * 160 - 80) + "px";
+      s.style.top = cy + (Math.random() * 60 - 30) + "px";
+      s.style.animationDuration = 0.9 + Math.random() * 0.9 + "s";
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 2000);
+    }
+  }
+
+  /* ---------- Envelope ---------- */
+  const envelope = $("envelope");
+  const letter = $("letter");
+  const hint = $("hint");
+  let opened = false;
+
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
+    envelope.classList.add("open");
+    hint.style.opacity = "0";
+    setTimeout(() => {
+      letter.classList.add("show");
+      const r = letter.getBoundingClientRect();
+      // confetti burst near the top of the letter
+      const xVW = (r.left + r.width / 2) / window.innerWidth * 100;
+      burstConfetti(80, xVW, 8);
+      sparkle(r.left + r.width / 2, r.top + 40, 12);
+    }, 450);
+  }
+
+  envelope.addEventListener("click", openEnvelope);
+  envelope.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openEnvelope(); }
+  });
+
+  /* ---------- Cake ---------- */
+  const cake = $("cake");
+  const blowBtn = $("blowBtn");
+  const wish = $("wish");
+  let blown = false;
+
+  blowBtn.addEventListener("click", () => {
+    if (blown) { burstConfetti(50); return; }
+    blown = true;
+    cake.classList.add("blown");
+    blowBtn.textContent = "Wish made! 🎉";
+    setTimeout(() => { wish.classList.add("show"); }, 250);
+    const r = cake.getBoundingClientRect();
+    sparkle(r.left + r.width / 2, r.top + 20, 18);
+    burstConfetti(140);
+  });
+
+  /* ---------- Flower garden ---------- */
+  const palette = [
+    { petal: "#ff7eb3", core: "#ffd76e" },
+    { petal: "#ffd76e", core: "#ff7eb3" },
+    { petal: "#c9a7ff", core: "#7ee0a8" },
+    { petal: "#ff9ec4", core: "#ffd76e" },
+    { petal: "#ffffff", core: "#ff7eb3" },
+    { petal: "#ff6aa6", core: "#c9a7ff" },
+    { petal: "#7ee0a8", core: "#ffd76e" },
+  ];
+  const petalCounts = [6, 8, 5, 7];
+
+  function makeFlower(i) {
+    const f = document.createElement("div");
+    f.className = "flower";
+    const pal = palette[i % palette.length];
+
+    const stem = document.createElement("div");
+    stem.className = "stem";
+    f.appendChild(stem);
+
+    const leafL = document.createElement("div");
+    leafL.className = "leaf left";
+    const leafR = document.createElement("div");
+    leafR.className = "leaf right";
+    f.appendChild(leafL);
+    f.appendChild(leafR);
+
+    const head = document.createElement("div");
+    head.className = "bloom-head";
+    const pw = document.createElement("div");
+    pw.className = "petals-wrapper";
+
+    const n = petalCounts[i % petalCounts.length];
+    for (let k = 0; k < n; k++) {
+      const p = document.createElement("div");
+      p.className = "p";
+      p.style.background = `radial-gradient(circle at 50% 85%, ${pal.petal}, ${shade(pal.petal, -18)})`;
+      p.style.transform = `rotate(${(360 / n) * k}deg)`;
+      pw.appendChild(p);
+    }
+    const core = document.createElement("div");
+    core.className = "core";
+    core.style.background = `radial-gradient(circle at 35% 30%, #fff4b8, ${pal.core} 65%, ${shade(pal.core, -20)})`;
+    pw.appendChild(core);
+
+    head.appendChild(pw);
+    f.appendChild(head);
+    return f;
+  }
+
+  function shade(hex, percent) {
+    const n = parseInt(hex.slice(1), 16);
+    let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+    const t = percent < 0 ? 0 : 255;
+    const p = Math.abs(percent) / 100;
+    r = Math.round((t - r) * p + r);
+    g = Math.round((t - g) * p + g);
+    b = Math.round((t - b) * p + b);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  const garden = $("garden");
+  const total = 9;
+  for (let i = 0; i < total; i++) garden.appendChild(makeFlower(i));
+
+  // bloom when scrolled into view
+  const bloomObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const flowers = [...garden.children];
+        flowers.forEach((fl, idx) => {
+          setTimeout(() => fl.classList.add("bloom"), idx * 140);
+        });
+        bloomObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  bloomObserver.observe(garden);
+
+  /* ---------- Welcome sparkle on load ---------- */
+  window.addEventListener("load", () => {
+    setTimeout(() => burstConfetti(60), 300);
+  });
+})();
+</script>
+</body>
+</html>
